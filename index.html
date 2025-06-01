@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Granite House Lofts: A Revitalization Strategy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Visualization & Content Choices: 
+        - Report Info: Socio-economic data (income, property value, poverty rate). Goal: Inform & Compare. Viz: Bar Chart (Chart.js). Interaction: Tooltips on hover. Justification: A bar chart provides a quick, clear comparison of key economic indicators, making the data more impactful than a table.
+        - Report Info: Racial composition. Goal: Inform. Viz: Doughnut Chart (Chart.js). Interaction: Tooltips. Justification: A doughnut chart is an effective way to show parts of a whole for demographic data.
+        - Report Info: Key employment sectors. Goal: Inform. Viz: Horizontal Bar Chart (Chart.js). Interaction: Tooltips. Justification: Horizontal bars are excellent for comparing categories with longer labels, like employment sectors.
+        - Report Info: Target Demographics (Entrepreneurs vs. Creatives). Goal: Compare & Inform. Presentation Method: Interactive Tabbed Section (HTML/CSS/JS). Interaction: Clicking tabs dynamically changes displayed content (needs, amenities, marketing points). Justification: This core interactive element allows users to directly compare the two target profiles side-by-side, making the nuanced strategy much easier to understand than reading through long paragraphs.
+        - Report Info: Actionable Recommendations. Goal: Organize & Inform. Presentation Method: Tabbed Content Panels (HTML/CSS/JS). Interaction: Clicking tabs reveals different sets of recommendations. Justification: Organizes a large number of recommendations into digestible, thematic categories (Product, Marketing, Community) to prevent information overload.
+    -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F7F4;
+            color: #2c3e50;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .nav-link {
+            transition: color 0.3s, border-bottom-color 0.3s;
+        }
+        .nav-link.active {
+            color: #3b82f6;
+            border-bottom-color: #3b82f6;
+        }
+        .persona-btn {
+            transition: all 0.3s;
+        }
+        .persona-btn.active {
+            background-color: #3B5998;
+            color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .strategy-tab.active {
+            background-color: #3B5998;
+            color: #ffffff;
+        }
+        .section-fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .section-fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-xl font-bold text-gray-800">Granite House Lofts</h1>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#opportunity" class="nav-link text-gray-600 hover:text-blue-500 border-b-2 border-transparent pb-1">The Opportunity</a>
+                <a href="#vision" class="nav-link text-gray-600 hover:text-blue-500 border-b-2 border-transparent pb-1">The Vision</a>
+                <a href="#strategy" class="nav-link text-gray-600 hover:text-blue-500 border-b-2 border-transparent pb-1">The Strategy</a>
+                <a href="#foundation" class="nav-link text-gray-600 hover:text-blue-500 border-b-2 border-transparent pb-1">Foundation</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero" class="bg-white py-20 md:py-32">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-4xl md:text-6xl font-bold text-gray-800 leading-tight">A New Chapter for Stone Mountain</h2>
+                <p class="mt-4 text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">Catalyzing growth, creativity, and community. This is an interactive strategic plan for Granite House Lofts, designed to attract new residents and contribute to the vibrant future of Stone Mountain, GA.</p>
+            </div>
+        </section>
+
+        <section id="opportunity" class="py-16 md:py-24 section-fade-in">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h3 class="text-3xl md:text-4xl font-bold text-gray-800">The Opportunity: A Snapshot of Stone Mountain</h3>
+                    <p class="mt-3 text-lg text-gray-600 max-w-3xl mx-auto">This section provides a high-level overview of Stone Mountain's current socio-economic landscape. Understanding these key metrics is the first step in identifying the unique opportunities for growth and revitalization. The charts and cards below visualize the data points that shape our strategy.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                    <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                        <p class="text-sm font-medium text-gray-500">Population</p>
+                        <p class="text-3xl font-bold text-gray-800 mt-1">~6,700</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                        <p class="text-sm font-medium text-gray-500">Median Age</p>
+                        <p class="text-3xl font-bold text-gray-800 mt-1">34.4</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                        <p class="text-sm font-medium text-gray-500">Median Household Income</p>
+                        <p class="text-3xl font-bold text-green-600 mt-1">$49,661</p>
+                        <p class="text-xs text-green-500">(+10.5% from 2022)</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                        <p class="text-sm font-medium text-gray-500">Median Property Value</p>
+                        <p class="text-3xl font-bold text-green-600 mt-1">$190,700</p>
+                        <p class="text-xs text-green-500">(+17.2% from 2022)</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="text-xl font-semibold text-gray-700 mb-4 text-center">Socio-Economic Indicators</h4>
+                        <div class="chart-container">
+                            <canvas id="economicChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="text-xl font-semibold text-gray-700 mb-4 text-center">Racial Composition</h4>
+                        <div class="chart-container">
+                            <canvas id="demographicsChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md lg:col-span-2">
+                        <h4 class="text-xl font-semibold text-gray-700 mb-4 text-center">Top Employment Sectors</h4>
+                         <div class="chart-container" style="height: 450px; max-height: 500px;">
+                            <canvas id="employmentChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="vision" class="py-16 md:py-24 bg-white section-fade-in">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h3 class="text-3xl md:text-4xl font-bold text-gray-800">The Vision: Cultivating Niche Communities</h3>
+                    <p class="mt-3 text-lg text-gray-600 max-w-3xl mx-auto">Our core strategy is to position Granite House Lofts as a destination for specific, high-value resident profiles. By understanding and catering to their unique needs, we can create a vibrant, sought-after community. Use the buttons below to explore our two primary target personas.</p>
+                </div>
+
+                <div class="flex justify-center space-x-4 mb-8">
+                    <button id="btn-entrepreneur" class="persona-btn px-6 py-3 font-semibold rounded-lg bg-gray-200 text-gray-700 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">The Entrepreneurial Escape</button>
+                    <button id="btn-creative" class="persona-btn px-6 py-3 font-semibold rounded-lg bg-gray-200 text-gray-700 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">The Creative Haven</button>
+                </div>
+
+                <div id="persona-content" class="bg-gray-50 p-8 rounded-lg shadow-inner max-w-4xl mx-auto transition-opacity duration-500">
+                </div>
+            </div>
+        </section>
+
+        <section id="strategy" class="py-16 md:py-24 section-fade-in">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h3 class="text-3xl md:text-4xl font-bold text-gray-800">The Strategy: A Blueprint for Growth</h3>
+                    <p class="mt-3 text-lg text-gray-600 max-w-3xl mx-auto">This section outlines the actionable recommendations to bring our vision to life. The strategy is built on four key pillars: Product Development, Marketing Outreach, Community Building, and supporting broader Town Revitalization. Click each tab to discover the specific initiatives for each pillar.</p>
+                </div>
+
+                <div class="max-w-5xl mx-auto">
+                    <div class="flex border-b border-gray-300">
+                        <button data-tab="product" class="strategy-tab flex-1 py-3 px-4 text-center font-medium text-gray-600 hover:bg-gray-200 focus:outline-none">Product</button>
+                        <button data-tab="marketing" class="strategy-tab flex-1 py-3 px-4 text-center font-medium text-gray-600 hover:bg-gray-200 focus:outline-none">Marketing</button>
+                        <button data-tab="community" class="strategy-tab flex-1 py-3 px-4 text-center font-medium text-gray-600 hover:bg-gray-200 focus:outline-none">Community</button>
+                        <button data-tab="town" class="strategy-tab flex-1 py-3 px-4 text-center font-medium text-gray-600 hover:bg-gray-200 focus:outline-none">Town Synergy</button>
+                    </div>
+                    <div id="strategy-content" class="bg-white p-8 rounded-b-lg shadow-md">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="foundation" class="py-16 md:py-24 bg-white section-fade-in">
+            <div class="container mx-auto px-6">
+                 <div class="text-center mb-12">
+                    <h3 class="text-3xl md:text-4xl font-bold text-gray-800">The Foundation: Lessons from Success</h3>
+                    <p class="mt-3 text-lg text-gray-600 max-w-3xl mx-auto">Our strategy is grounded in proven principles of successful community revitalization. The experiences of other towns provide a blueprint for how comprehensive planning, asset-based development, and a long-term vision can create lasting prosperity. These case studies inform our approach for Stone Mountain.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                        <h4 class="font-bold text-lg text-gray-800">Ord, Nebraska</h4>
+                        <p class="mt-2 text-gray-600"><strong>Principle:</strong> Comprehensive Vision. Integrated community capacity-building (leadership, youth programs) with economic development (recruiting a major employer) to create holistic success.</p>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                        <h4 class="font-bold text-lg text-gray-800">Davidson, North Carolina</h4>
+                        <p class="mt-2 text-gray-600"><strong>Principle:</strong> Long-Term Planning. Focused on creating lasting value and pride for future generations, demonstrating the power of patience and regional collaboration.</p>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                        <h4 class="font-bold text-lg text-gray-800">Big Stone Gap, Virginia</h4>
+                        <p class="mt-2 text-gray-600"><strong>Principle:</strong> Entrepreneurial Focus. Patiently cultivated a local ecosystem that supported the emergence and growth of new, homegrown businesses over several years.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2024 Granite House Lofts Strategic Vision. All rights reserved.</p>
+            <p class="text-sm text-gray-400 mt-2">This interactive report is for planning and discussion purposes.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            
+            const personaData = {
+                entrepreneur: {
+                    title: 'The Entrepreneurial Escape',
+                    description: 'A live/work environment designed for productivity, creativity, and well-being. This proposition targets entrepreneurs, freelancers, and remote workers who seek a seamless blend of home and office, supported by powerful infrastructure and a collaborative community.',
+                    points: [
+                        { icon: '💻', title: 'Key Housing Needs', text: 'Flexible live/work spaces, dedicated work nooks, inspiring design, and quiet zones for deep focus.' },
+                        { icon: '🚀', title: 'Must-Have Amenities', text: 'Ultra-high-speed internet (Gigabit+), co-working spaces, private meeting rooms, and quality coffee access.' },
+                        { icon: '🤝', title: 'Community Focus', text: 'Networking events, skill-sharing workshops, and access to a community of like-minded innovators.' },
+                        { icon: '🌳', title: 'Stone Mountain Appeal', text: 'An "escape" near nature for work-life balance, leveraging the Park and Trail for recreation and mental clarity.' }
+                    ]
+                },
+                creative: {
+                    title: 'The Creative Haven',
+                    description: 'A sanctuary for actors, artists, and film professionals. This proposition provides a comfortable, convenient, and inspiring space for creatives working in Atlanta\'s booming film industry, offering flexibility and thoughtful amenities.',
+                    points: [
+                        { icon: '🎬', title: 'Key Housing Needs', text: 'Furnished/unfurnished options, great natural light for self-tapes, unique character, and sound insulation.' },
+                        { icon: '🛋️', title: 'Must-Have Amenities', text: 'Flexible short-term leases, in-unit laundry, blackout curtains, secure package delivery, and pet-friendly policies.' },
+                        { icon: '🤫', title: 'Community Focus', text: 'Privacy is respected, with optional access to local creative scene networking events. A quiet retreat.' },
+                        { icon: '🚗', title: 'Stone Mountain Appeal', text: 'Proximity to Atlanta film hubs without the city price tag. A quiet, character-rich alternative to corporate housing.' }
+                    ]
+                }
+            };
+
+            const strategyData = {
+                product: {
+                    title: 'Product Development',
+                    items: [
+                        '<strong>Flexible Loft Layouts:</strong> Adaptable designs for live/work needs with great natural light.',
+                        '<strong>Tiered Amenity Packages:</strong> Offer basic to premium tiers to suit different budgets and needs.',
+                        '<strong>Smart Home Technology:</strong> Integrate smart thermostats, keyless entry, and security.',
+                        '<strong>Focus on High-Speed Internet:</strong> Core offering of robust, reliable, high-speed fiber internet.',
+                        '<strong>Functional Common Areas:</strong> Inspiring co-working spaces, meeting rooms, and social lounges.',
+                        '<strong>Outdoor Integration:</strong> Provide bike storage and promote access to Stone Mountain Park and Trail.',
+                        '<strong>Sustainability Features:</strong> Incorporate green building practices, EV charging, and recycling programs.'
+                    ]
+                },
+                marketing: {
+                    title: 'Marketing & Outreach',
+                    items: [
+                        '<strong>Develop Distinct Messaging:</strong> Tailor campaigns for each target persona.',
+                        '<strong>Niche Channel Marketing:</strong> Advertise on entrepreneurial sites and film industry housing boards.',
+                        '<strong>Content Marketing Strategy:</strong> Use blogs and videos to showcase the lifestyle and success stories.',
+                        '<strong>Strategic Partnerships:</strong> Forge connections with local businesses, co-working spaces, and arts groups.',
+                        '<strong>Visual Storytelling:</strong> Invest in high-quality photography and videography.',
+                        '<strong>Address Perceptions Proactively:</strong> Highlight positive attributes and the inclusive community.',
+                    ]
+                },
+                community: {
+                    title: 'Community Building',
+                    items: [
+                        '<strong>Resident Engagement Programs:</strong> Host regular social events, networking sessions, and workshops.',
+                        '<strong>Local Business Partnerships:</strong> Offer resident discounts to support the local economy.',
+                        '<strong>Connect with City Initiatives:</strong> Participate in local festivals and community projects.',
+                        '<strong>Establish Feedback Mechanisms:</strong> Create clear channels for resident feedback and suggestions.'
+                    ]
+                },
+                town: {
+                    title: 'Town Synergy',
+                    items: [
+                        '<strong>Engage with Trail Master Plan:</strong> Support and integrate with the "Beltline-style" growth of the Stone Mountain Trail.',
+                        '<strong>Contribute to Downtown Vitality:</strong> Increase foot traffic and support local businesses; consider ground-floor retail.',
+                        '<strong>Participate in Local Planning:</strong> Act as a collaborative partner in the city\'s comprehensive plans.',
+                        '<strong>Support Local Arts & Culture:</strong> Provide space for exhibitions or partner with local artists.'
+                    ]
+                }
+            };
+
+            function renderPersonaContent(persona) {
+                const data = personaData[persona];
+                const contentEl = document.getElementById('persona-content');
+                contentEl.style.opacity = 0;
+                
+                setTimeout(() => {
+                    let html = `<h4 class="text-2xl font-bold text-gray-800 mb-2">${data.title}</h4>`;
+                    html += `<p class="text-gray-600 mb-6">${data.description}</p>`;
+                    html += '<div class="grid grid-cols-1 md:grid-cols-2 gap-6">';
+                    data.points.forEach(point => {
+                        html += `
+                            <div class="bg-white p-4 rounded-lg flex items-start">
+                                <span class="text-2xl mr-4">${point.icon}</span>
+                                <div>
+                                    <h5 class="font-semibold text-gray-700">${point.title}</h5>
+                                    <p class="text-sm text-gray-600">${point.text}</p>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    html += '</div>';
+                    contentEl.innerHTML = html;
+                    contentEl.style.opacity = 1;
+                }, 300);
+            }
+            
+            function renderStrategyContent(tab) {
+                const data = strategyData[tab];
+                const contentEl = document.getElementById('strategy-content');
+                let html = `<h4 class="text-2xl font-bold text-gray-800 mb-4">${data.title}</h4>`;
+                html += '<ul class="space-y-3 list-disc list-inside text-gray-700">';
+                data.items.forEach(item => {
+                    html += `<li>${item}</li>`;
+                });
+                html += '</ul>';
+                contentEl.innerHTML = html;
+            }
+
+
+            const btnEntrepreneur = document.getElementById('btn-entrepreneur');
+            const btnCreative = document.getElementById('btn-creative');
+
+            btnEntrepreneur.addEventListener('click', () => {
+                renderPersonaContent('entrepreneur');
+                btnEntrepreneur.classList.add('active');
+                btnCreative.classList.remove('active');
+            });
+
+            btnCreative.addEventListener('click', () => {
+                renderPersonaContent('creative');
+                btnCreative.classList.add('active');
+                btnEntrepreneur.classList.remove('active');
+            });
+            
+            const strategyTabs = document.querySelectorAll('.strategy-tab');
+            strategyTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const tabName = tab.dataset.tab;
+                    renderStrategyContent(tabName);
+                    strategyTabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                });
+            });
+
+            renderPersonaContent('entrepreneur');
+            btnEntrepreneur.classList.add('active');
+            
+            renderStrategyContent('product');
+            document.querySelector('.strategy-tab[data-tab="product"]').classList.add('active');
+
+            const economicCtx = document.getElementById('economicChart').getContext('2d');
+            new Chart(economicCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Median Household Income', 'Median Property Value', 'Poverty Rate (%)'],
+                    datasets: [{
+                        label: 'Value',
+                        data: [49661, 190700, 15.3],
+                        backgroundColor: [
+                            'rgba(75, 192, 192, 0.6)',
+                            'rgba(54, 162, 235, 0.6)',
+                            'rgba(255, 99, 132, 0.6)'
+                        ],
+                        borderColor: [
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 99, 132, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        if(context.label === 'Poverty Rate (%)') {
+                                           label += context.parsed.y + '%';
+                                        } else {
+                                           label += new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(context.parsed.y);
+                                        }
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            const demographicsCtx = document.getElementById('demographicsChart').getContext('2d');
+            new Chart(demographicsCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Black/African American', 'White', 'Other'],
+                    datasets: [{
+                        data: [80.6, 13.5, 5.9],
+                        backgroundColor: [
+                            'rgba(54, 162, 235, 0.8)',
+                            'rgba(75, 192, 192, 0.8)',
+                            'rgba(255, 206, 86, 0.8)'
+                        ],
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        }
+                    }
+                }
+            });
+            
+            const employmentCtx = document.getElementById('employmentChart').getContext('2d');
+            new Chart(employmentCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Transportation & Warehousing', 'Accommodation & Food Services', 'Retail Trade'],
+                    datasets: [{
+                        label: 'Number of People',
+                        data: [598, 478, 453],
+                         backgroundColor: [
+                            'rgba(255, 159, 64, 0.6)',
+                            'rgba(153, 102, 255, 0.6)',
+                            'rgba(75, 192, 192, 0.6)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 159, 64, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(75, 192, 192, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+
+            const sections = document.querySelectorAll('.section-fade-in');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        
+                        navLinks.forEach(link => {
+                           link.classList.remove('active');
+                           if(link.getAttribute('href').substring(1) === entry.target.id){
+                               link.classList.add('active');
+                           }
+                        });
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+
+</body>
+</html>
