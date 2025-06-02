@@ -9,18 +9,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Visualization & Content Choices: 
-        - Report Info: Socio-economic data (income, property value, poverty rate). Goal: Inform & Compare. Viz: Bar Chart (Chart.js). Interaction: Tooltips on hover. Justification: A bar chart provides a quick, clear comparison of key economic indicators, making the data more impactful than a table.
-        - Report Info: Racial composition. Goal: Inform. Viz: Doughnut Chart (Chart.js). Interaction: Tooltips. Justification: A doughnut chart is an effective way to show parts of a whole for demographic data.
-        - Report Info: Key employment sectors. Goal: Inform. Viz: Horizontal Bar Chart (Chart.js). Interaction: Tooltips. Justification: Horizontal bars are excellent for comparing categories with longer labels, like employment sectors.
-        - Report Info: Target Demographics (Entrepreneurs vs. Creatives). Goal: Compare & Inform. Presentation Method: Interactive Tabbed Section (HTML/CSS/JS). Interaction: Clicking tabs dynamically changes displayed content (needs, amenities, marketing points). Justification: This core interactive element allows users to directly compare the two target profiles side-by-side, making the nuanced strategy much easier to understand than reading through long paragraphs.
-        - Report Info: Actionable Recommendations. Goal: Organize & Inform. Presentation Method: Tabbed Content Panels (HTML/CSS/JS). Interaction: Clicking tabs reveals different sets of recommendations. Justification: Organizes a large number of recommendations into digestible, thematic categories (Product, Marketing, Community) to prevent information overload.
-    -->
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #F8F7F4;
-            color: #2c3e50;
+            background-color: #F8F7F4; /* Warm Neutral Background */
+            color: #2c3e50; /* Dark Slate Blue for text */
         }
         .chart-container {
             position: relative;
@@ -40,21 +33,36 @@
             transition: color 0.3s, border-bottom-color 0.3s;
         }
         .nav-link.active {
-            color: #3b82f6;
-            border-bottom-color: #3b82f6;
+            color: #4A5568; /* Slate Gray for active nav link */
+            border-bottom-color: #4A5568;
+        }
+        .nav-link:hover {
+             color: #2D3748; /* Darker Slate Gray for hover */
         }
         .persona-btn {
             transition: all 0.3s;
+            background-color: #E2E8F0; /* Light Slate Gray for buttons */
+            color: #2D3748; /* Dark Slate for button text */
         }
         .persona-btn.active {
-            background-color: #3B5998;
+            background-color: #4A5568; /* Slate Gray for active button */
             color: #ffffff;
             transform: translateY(-2px);
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
+        .persona-btn:hover {
+            background-color: #CBD5E0; /* Medium Slate Gray for hover */
+        }
+        .strategy-tab {
+            color: #4A5568;
+            transition: all 0.3s;
+        }
         .strategy-tab.active {
-            background-color: #3B5998;
+            background-color: #4A5568; /* Slate Gray for active tab */
             color: #ffffff;
+        }
+        .strategy-tab:hover {
+            background-color: #E2E8F0;
         }
         .section-fade-in {
             opacity: 0;
@@ -65,6 +73,13 @@
             opacity: 1;
             transform: translateY(0);
         }
+        /* Accent color subtle use - e.g. for specific highlights if needed */
+        .accent-color-text {
+            color: #A0AEC0; /* Lighter Slate, for subtle accents */
+        }
+        .bg-warm-subtle {
+            background-color: #F1ECE6; /* Slightly warmer off-white for contrasting panels */
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -73,10 +88,10 @@
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
             <h1 class="text-xl font-bold text-gray-800">Granite House Lofts</h1>
             <div class="hidden md:flex items-center space-x-8">
-                <a href="#opportunity" class="nav-link text-gray-600 hover:text-blue-500 border-b-2 border-transparent pb-1">The Opportunity</a>
-                <a href="#vision" class="nav-link text-gray-600 hover:text-blue-500 border-b-2 border-transparent pb-1">The Vision</a>
-                <a href="#strategy" class="nav-link text-gray-600 hover:text-blue-500 border-b-2 border-transparent pb-1">The Strategy</a>
-                <a href="#foundation" class="nav-link text-gray-600 hover:text-blue-500 border-b-2 border-transparent pb-1">Foundation</a>
+                <a href="#opportunity" class="nav-link text-gray-600 border-b-2 border-transparent pb-1">The Opportunity</a>
+                <a href="#vision" class="nav-link text-gray-600 border-b-2 border-transparent pb-1">The Vision</a>
+                <a href="#strategy" class="nav-link text-gray-600 border-b-2 border-transparent pb-1">The Strategy</a>
+                <a href="#foundation" class="nav-link text-gray-600 border-b-2 border-transparent pb-1">Foundation</a>
             </div>
         </nav>
     </header>
@@ -89,7 +104,7 @@
             </div>
         </section>
 
-        <section id="opportunity" class="py-16 md:py-24 section-fade-in">
+        <section id="opportunity" class="py-16 md:py-24 section-fade-in bg-warm-subtle">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-12">
                     <h3 class="text-3xl md:text-4xl font-bold text-gray-800">The Opportunity: A Snapshot of Stone Mountain</h3>
@@ -148,16 +163,57 @@
                 </div>
 
                 <div class="flex justify-center space-x-4 mb-8">
-                    <button id="btn-entrepreneur" class="persona-btn px-6 py-3 font-semibold rounded-lg bg-gray-200 text-gray-700 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">The Entrepreneurial Escape</button>
-                    <button id="btn-creative" class="persona-btn px-6 py-3 font-semibold rounded-lg bg-gray-200 text-gray-700 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">The Creative Haven</button>
+                    <button id="btn-entrepreneur" class="persona-btn px-6 py-3 font-semibold rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500">The Entrepreneurial Escape</button>
+                    <button id="btn-creative" class="persona-btn px-6 py-3 font-semibold rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500">The Creative Haven</button>
                 </div>
 
-                <div id="persona-content" class="bg-gray-50 p-8 rounded-lg shadow-inner max-w-4xl mx-auto transition-opacity duration-500">
+                <div id="persona-content" class="bg-warm-subtle p-8 rounded-lg shadow-inner max-w-4xl mx-auto transition-opacity duration-500">
+                </div> <div class="mt-16 pt-12 border-t border-gray-300">
+                    <div class="text-center mb-10">
+                        <h4 class="text-3xl font-bold text-gray-800">The Digital Nomad Wave: A Stone Mountain Opportunity</h4>
+                        <p class="mt-3 text-lg text-gray-600 max-w-3xl mx-auto">Beyond traditional resident profiles, the rise of digital nomads presents a unique opportunity for places like Stone Mountain, which can offer a compelling blend of lifestyle and connectivity.</p>
+                    </div>
+
+                    <div class="max-w-4xl mx-auto bg-warm-subtle p-8 rounded-lg shadow-inner">
+                        <div class="flex flex-col md:flex-row items-center justify-center text-center md:text-left mb-8">
+                            <div class="text-5xl md:text-6xl font-bold text-slate-600 mb-4 md:mb-0 md:mr-8">17M+</div>
+                            <p class="text-lg md:text-xl text-gray-700">Over <strong>17 million Americans</strong> identify as digital nomads, a number that has more than doubled since 2019, showcasing a fundamental shift in work-life preferences.</p>
+                        </div>
+
+                        <h5 class="text-xl font-semibold text-gray-700 mb-6 text-center">What Attracts Digital Nomads to Unique Locations?</h5>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 text-gray-600">
+                            <div class="bg-white p-4 rounded-lg shadow-sm flex items-start">
+                                <span class="text-2xl mr-3">🏡</span>
+                                <div><strong>Authentic Charm & Character:</strong> Unique local businesses, historic architecture, and a strong sense of place.</div>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg shadow-sm flex items-start">
+                                <span class="text-2xl mr-3">🌳</span>
+                                <div><strong>Nature & Outdoor Access:</strong> Proximity to parks and trails for recreation and well-being (a key Stone Mountain asset).</div>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg shadow-sm flex items-start">
+                                <span class="text-2xl mr-3">💰</span>
+                                <div><strong>Value & Affordability:</strong> Lower cost of living compared to major metropolitan hubs, enhancing quality of life.</div>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg shadow-sm flex items-start">
+                                <span class="text-2xl mr-3">🤝</span>
+                                <div><strong>Community & Connection:</strong> Welcoming local communities and opportunities for genuine connection.</div>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg shadow-sm flex items-start">
+                                <span class="text-2xl mr-3">🚶</span>
+                                <div><strong>Walkability & Local Amenities:</strong> Pleasant town centers with cafes, shops, and essential services.</div>
+                            </div>
+                             <div class="bg-white p-4 rounded-lg shadow-sm flex items-start">
+                                <span class="text-2xl mr-3">🏙️</span>
+                                <div><strong>Balanced Proximity:</strong> Easy access to a nearby major city's resources, while enjoying a more peaceful daily environment.</div>
+                            </div>
+                        </div>
+                        <p class="mt-8 text-center text-gray-700">Stone Mountain, with its developing trail, historic village, natural park, and proximity to Atlanta, is well-positioned to capture this growing interest by offering a unique, character-rich alternative for digital nomads.</p>
+                    </div>
                 </div>
-            </div>
+                </div>
         </section>
 
-        <section id="strategy" class="py-16 md:py-24 section-fade-in">
+        <section id="strategy" class="py-16 md:py-24 bg-warm-subtle section-fade-in">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-12">
                     <h3 class="text-3xl md:text-4xl font-bold text-gray-800">The Strategy: A Blueprint for Growth</h3>
@@ -166,10 +222,10 @@
 
                 <div class="max-w-5xl mx-auto">
                     <div class="flex border-b border-gray-300">
-                        <button data-tab="product" class="strategy-tab flex-1 py-3 px-4 text-center font-medium text-gray-600 hover:bg-gray-200 focus:outline-none">Product</button>
-                        <button data-tab="marketing" class="strategy-tab flex-1 py-3 px-4 text-center font-medium text-gray-600 hover:bg-gray-200 focus:outline-none">Marketing</button>
-                        <button data-tab="community" class="strategy-tab flex-1 py-3 px-4 text-center font-medium text-gray-600 hover:bg-gray-200 focus:outline-none">Community</button>
-                        <button data-tab="town" class="strategy-tab flex-1 py-3 px-4 text-center font-medium text-gray-600 hover:bg-gray-200 focus:outline-none">Town Synergy</button>
+                        <button data-tab="product" class="strategy-tab flex-1 py-3 px-4 text-center font-medium hover:bg-gray-200 focus:outline-none">Product</button>
+                        <button data-tab="marketing" class="strategy-tab flex-1 py-3 px-4 text-center font-medium hover:bg-gray-200 focus:outline-none">Marketing</button>
+                        <button data-tab="community" class="strategy-tab flex-1 py-3 px-4 text-center font-medium hover:bg-gray-200 focus:outline-none">Community</button>
+                        <button data-tab="town" class="strategy-tab flex-1 py-3 px-4 text-center font-medium hover:bg-gray-200 focus:outline-none">Town Synergy</button>
                     </div>
                     <div id="strategy-content" class="bg-white p-8 rounded-b-lg shadow-md">
                     </div>
@@ -177,7 +233,7 @@
             </div>
         </section>
 
-       <section id="foundation" class="py-16 md:py-24 bg-white section-fade-in">
+        <section id="foundation" class="py-16 md:py-24 bg-white section-fade-in">
             <div class="container mx-auto px-6">
                  <div class="text-center mb-12">
                     <h3 class="text-3xl md:text-4xl font-bold text-gray-800">The Foundation: Progressive Inspiration</h3>
@@ -185,15 +241,15 @@
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                    <div class="bg-warm-subtle p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow">
                         <h4 class="font-bold text-lg text-gray-800">Austin, Texas</h4>
                         <p class="mt-2 text-gray-600"><strong>Principle:</strong> Fostering Innovation & Culture. Cultivated a dynamic ecosystem for tech and creatives through strategic support for startups, a world-renowned live music and arts scene, and a strong "Keep Austin Weird" local identity, attracting significant talent and investment.</p>
                     </div>
-                    <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                    <div class="bg-warm-subtle p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow">
                         <h4 class="font-bold text-lg text-gray-800">Venice Beach, CA (Abbott Kinney / Main St.)</h4>
                         <p class="mt-2 text-gray-600"><strong>Principle:</strong> Curated Destination & Unique Brand. Transformed key streets into globally recognized destinations by fostering an eclectic mix of independent boutiques, influential dining, art galleries, and a distinct local character that attracts trend-conscious visitors and creative residents.</p>
                     </div>
-                    <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                    <div class="bg-warm-subtle p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow">
                         <h4 class="font-bold text-lg text-gray-800">Wyoming, Ohio (Wyoming Ave.)</h4>
                         <p class="mt-2 text-gray-600"><strong>Principle:</strong> Vibrant Main Street & Community Hub. Revitalized its central avenue by strategically nurturing and attracting a mix of key local businesses, enhancing walkability, preserving historic character, and creating a charming commercial district that serves as a strong community focal point and regional draw.</p>
                     </div>
@@ -204,13 +260,14 @@
     
     <footer class="bg-gray-800 text-white py-8">
         <div class="container mx-auto px-6 text-center">
-            <p>&copy; 2024 Granite House Lofts Strategic Vision. All rights reserved.</p>
+            <p>&copy; <span id="currentYear"></span> Granite House Lofts Strategic Vision. All rights reserved.</p>
             <p class="text-sm text-gray-400 mt-2">This interactive report is for planning and discussion purposes.</p>
         </div>
     </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
             
             const personaData = {
                 entrepreneur: {
@@ -290,7 +347,7 @@
                     html += '<div class="grid grid-cols-1 md:grid-cols-2 gap-6">';
                     data.points.forEach(point => {
                         html += `
-                            <div class="bg-white p-4 rounded-lg flex items-start">
+                            <div class="bg-white p-4 rounded-lg flex items-start shadow-sm">
                                 <span class="text-2xl mr-4">${point.icon}</span>
                                 <div>
                                     <h5 class="font-semibold text-gray-700">${point.title}</h5>
@@ -343,10 +400,10 @@
                 });
             });
 
-            renderPersonaContent('entrepreneur');
+            renderPersonaContent('entrepreneur'); // Default persona
             btnEntrepreneur.classList.add('active');
             
-            renderStrategyContent('product');
+            renderStrategyContent('product'); // Default strategy tab
             document.querySelector('.strategy-tab[data-tab="product"]').classList.add('active');
 
             const economicCtx = document.getElementById('economicChart').getContext('2d');
@@ -374,21 +431,15 @@
                     responsive: true,
                     maintainAspectRatio: false,
                     scales: {
-                        y: {
-                            beginAtZero: true
-                        }
+                        y: { beginAtZero: true }
                     },
                     plugins: {
-                        legend: {
-                            display: false
-                        },
+                        legend: { display: false },
                         tooltip: {
                             callbacks: {
                                 label: function(context) {
                                     let label = context.dataset.label || '';
-                                    if (label) {
-                                        label += ': ';
-                                    }
+                                    if (label) { label += ': '; }
                                     if (context.parsed.y !== null) {
                                         if(context.label === 'Poverty Rate (%)') {
                                            label += context.parsed.y + '%';
@@ -422,11 +473,7 @@
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            position: 'top',
-                        }
-                    }
+                    plugins: { legend: { position: 'top' } }
                 }
             });
             
@@ -455,11 +502,7 @@
                     indexAxis: 'y',
                     responsive: true,
                     maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            display: false
-                        }
-                    }
+                    plugins: { legend: { display: false } }
                 }
             });
 
@@ -477,13 +520,25 @@
                                link.classList.add('active');
                            }
                         });
+                         // For hero, make "The Opportunity" active as it's first logical section
+                        if (entry.target.id === 'hero') {
+                            const opportunityLink = document.querySelector('a[href="#opportunity"]');
+                            if (opportunityLink) opportunityLink.classList.add('active');
+                        }
                     }
                 });
-            }, { threshold: 0.1 });
+            }, { threshold: 0.1 }); // Adjust threshold as needed, 0.1 means 10% of section is visible
 
             sections.forEach(section => {
                 observer.observe(section);
             });
+            // Ensure hero section also triggers observer logic if it's at the top
+             const heroSection = document.getElementById('hero');
+            if (heroSection) { // Check if hero section exists
+                 observer.observe(heroSection);
+             }
+
+
         });
     </script>
 
